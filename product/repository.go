@@ -1,51 +1,57 @@
 package product
 
 import (
-	"anaconda/database"
-
 	"anaconda/utils"
+
+	"github.com/jmoiron/sqlx"
 )
 
 type repository struct {
-	db *database.Postgres
+	db *sqlx.DB
 }
 
 var (
 	insertProduct = `
-	insert into products (
-		product_name, 
-		category, 
-		barcode, 
-		price, 
-		stock, 
-		create_date, 
-		created_by) 
-	values (
-		:product_name, 
-		:category, 
-		:barcode, 
-		:price, 
-		:stock, 
-		now(), 
-		:created_by)
-		`
+	INSERT INTO
+		products (
+			product_name,
+			category,
+			barcode,
+			price,
+			stock,
+			create_date,
+			created_by
+		)
+	VALUES
+		(
+			:product_name,
+			:category,
+			:barcode,
+			:price,
+			:stock,
+			NOW(),
+			:created_by
+		)
+	`
+
 	selectProduct = `
-	select 
-		id, 
-		product_name , 
-		category , 
-		barcode , 
-		price , 
-		stock , 
-		create_date , 
-		update_date , 
-		updated_by  
-	from products p	
+	SELECT
+		id,
+		product_name,
+		category,
+		barcode,
+		price,
+		stock,
+		create_date,
+		update_date,
+		updated_by
+	FROM
+		products p
 	`
 )
 
 func (r repository) SubmitProduct(param ProductModel) error {
-	tx, err := r.db.GetActiveDB().Beginx()
+	tx, err := r.db.Beginx()
 	if err != nil {
 		utils.ErrorLog("SubmitSurvey InsertProduct", err)
 		return err
@@ -68,7 +74,7 @@ func (r repository) SubmitProduct(param ProductModel) error {
 
 func (r repository) GetProducts() (*ProductModels, error) {
 	dest := &ProductModels{}
-	err := r.db.GetActiveDB().Select(dest, selectProduct+" ORDER BY product_name ASC")
+	err := r.db.Select(dest, selectProduct+" ORDER BY product_name ASC")
 	if err != nil {
 		utils.ErrorLog("ProductRepository GetProdcut Select", err)
 		return nil, err

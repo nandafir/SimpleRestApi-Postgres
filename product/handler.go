@@ -5,10 +5,6 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	// "xapiens.id/shared/errs"
-	// "xapiens.id/shared/auth"
-	// "xapiens.id/shared/errs"
-	// "xapiens.id/shared/utils"
 )
 
 type Handler struct {
@@ -16,11 +12,7 @@ type Handler struct {
 }
 
 func (h Handler) handleAddProduct(c *gin.Context) {
-
-	//Binding to params var
 	var params ProductRequest
-	// username := c.GetString("UserName")
-
 	if err := c.ShouldBind(&params); err != nil {
 		c.JSON(http.StatusBadRequest, utils.ErrorResponse(err))
 		return
@@ -36,7 +28,6 @@ func (h Handler) handleAddProduct(c *gin.Context) {
 }
 
 func (h Handler) handleGetProduct(c *gin.Context) {
-
 	res, err := h.service.GetProducts()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, utils.ErrorResponse(err))

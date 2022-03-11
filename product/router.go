@@ -10,9 +10,9 @@ func Register(router *gin.Engine, service *Service) {
 	}
 	v1 := router.Group("/v1/anaconda")
 
-	v1survey := v1.Group("/product")
+	product := v1.Group("/product")
 	{
-		v1survey.POST("/add", handler.handleAddProduct)
-		v1survey.GET("", handler.handleGetProduct)
+		product.POST("", handler.handleAddProduct)
+		product.GET("", handler.handleGetProduct)
 	}
 }

@@ -12,7 +12,7 @@ var (
 
 // Config ...
 type Config struct {
-	Port              int           `envconfig:"PORT" default:"5432"`
+	Port              int           `envconfig:"PORT" default:"8080"`
 	DBName            string        `envconfig:"PRODUCT_DB" default:"local_sample"`
 	DBHost            string        `envconfig:"PRODUCT_DB_HOST" default:"localhost"`
 	DBPort            int           `envconfig:"PRODUCT_DB_HOST" default:"5432"`

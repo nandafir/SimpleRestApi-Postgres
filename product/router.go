@@ -5,7 +5,6 @@ import (
 )
 
 func Register(router *gin.Engine, service *Service) {
-	// conf := config.Get()
 	handler := &Handler{
 		service: service,
 	}
@@ -15,7 +14,5 @@ func Register(router *gin.Engine, service *Service) {
 	{
 		v1survey.POST("/add", handler.handleAddProduct)
 		v1survey.GET("", handler.handleGetProduct)
-		// v1survey.DELETE(":id", handler.handleDeleteSurvey)
-		// v1survey.PUT(":id", handler.handleUpdateSurvey)
 	}
 }

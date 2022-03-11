@@ -4,7 +4,6 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	// "xapiens.id/shared/utils"
 )
 
 type ProductModel struct {

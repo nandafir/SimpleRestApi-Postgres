@@ -14,17 +14,6 @@ import (
 
 	"anaconda/config"
 	"anaconda/product"
-	// "xapiens.id/geosurvey/config"
-	// "xapiens.id/geosurvey/exploration"
-	// geologyModel "xapiens.id/geosurvey/geology-model"
-	// "xapiens.id/geosurvey/master"
-	// notifService "xapiens.id/geosurvey/notification"
-	// "xapiens.id/geosurvey/survey"
-	// uploadExcel "xapiens.id/geosurvey/upload-excel"
-	// "xapiens.id/shared/content"
-	// "xapiens.id/shared/health"
-	// notifClient "xapiens.id/shared/notification"
-	// "xapiens.id/shared/swaggerui"
 )
 
 // Start start the server
@@ -34,27 +23,8 @@ func Start() error {
 	router.Use(gin.Recovery())
 
 	config := config.Get()
-
-	// contentClient := content.New(config.ContentHost, config.RetryCount, config.DebugMode)
-	// notificationClient := notifClient.Init(config.NotificationHost, config.RetryCount, config.DebugMode, config.NotificationType)
-
-	// masterService := master.New(contentClient)
-	// uploadExcelService := uploadExcel.New()
-	// notificationService := notifService.New(notificationClient)
 	productService := product.NewService()
-	// explorationService := exploration.New(masterService, contentClient)
-	// geologyModelService := geologyModel.NewService(masterService, contentClient)
-
-	// master.Register(router, masterService)
 	product.Register(router, productService)
-	// exploration.Register(router, explorationService, uploadExcelService, contentClient)
-	// geologyModel.Register(router, geologyModelService, uploadExcelService, contentClient)
-	// uploadExcel.Register(router, uploadExcelService)
-
-	// health.Register(router)
-
-	// router.Static("/images", "./images")
-	// router.StaticFile("/swagger.json", "./swagger.json")
 
 	srv := &http.Server{
 		Addr:    fmt.Sprintf(":%d", config.Port),

@@ -26,7 +26,7 @@ type Config struct {
 	JWTSecret          string        `envconfig:"JWT_SECRET" default:"simplerestapi"`
 	JWTExpiredDuration time.Duration `envconfig:"JWT_EXPIRED_DURATION" default:"168h"`
 
-	ContentHost string `envconfig:"CONTENT_HOST" default:"http://10.64.21.25:30001"`
+	ContentHost string `envconfig:"CONTENT_HOST" default:"http://192.168.0.1:8000"`
 
 	LogLevel string `envconfig:"LOG_LEVEL" default:"debug"`
 	LogDSN   string `envconfig:"LOG_DSN" default:""`
